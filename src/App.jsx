@@ -8,9 +8,7 @@ import Projects from "./components/Projects/Projects";
 import Experience from "./components/Experience";
 import Philosophy from "./components/Philosophy";
 import Contact from "./components/Contact";
-import CustomCursor from "./components/CustomCursor";
 import ScrollProgressIndicator from "./components/ScrollProgressIndicator";
-import ExplorationIndicator from "./components/ExplorationIndicator";
 import { useAnimeScroll } from "./hooks/useAnimeScroll";
 
 const sections = [
@@ -85,13 +83,11 @@ export default function App() {
         <Preloader onComplete={() => setLoading(false)} />
       ) : (
         <div className="relative min-h-screen bg-obsidian text-ivory font-sans selection:bg-gold-antique selection:text-obsidian overflow-x-hidden">
-          <CustomCursor />
           <ScrollProgressIndicator
             sections={sections}
             activeSection={activeSection}
             scrollProgress={scrollProgress}
           />
-          <ExplorationIndicator />
           <Navbar
             activeSection={activeSection}
             setActiveSection={setActiveSection}
@@ -111,3 +107,4 @@ export default function App() {
     </>
   );
 }
+

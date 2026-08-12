@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, ArrowUpRight, Code, Globe, X, Send, CheckCircle2 } from 'lucide-react';
+import { Mail, ArrowUpRight, Code, Globe, X, Send, CheckCircle2, Loader2, AlertCircle } from 'lucide-react';
+import MagneticButton from './ui/MagneticButton';
+import { sendContactEmail } from '../services/email.service';
 
 export default function Contact() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -18,24 +23,33 @@ export default function Contact() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Simulate sending message
-    setIsModalOpen(false);
-    setShowToast(true);
-    setFormData({
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: '',
-    });
+    setIsSubmitting(true);
+    setErrorMessage('');
 
-    // Auto dismiss toast
-    setTimeout(() => {
-      setShowToast(false);
-    }, 4500);
+    try {
+      await sendContactEmail(formData);
+      setIsModalOpen(false);
+      setShowToast(true);
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: '',
+      });
+
+      setTimeout(() => {
+        setShowToast(false);
+      }, 5000);
+    } catch (err) {
+      console.error('Email send error:', err);
+      setErrorMessage(err?.text || err?.message || 'Failed to send message. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -47,7 +61,7 @@ export default function Contact() {
           
           {/* Subtle background monogram watermark */}
           <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
-            <img src="/gm_logo.png" alt="Watermark Logo" className="w-96 h-96 object-contain" />
+            <img src="/favicon.png" alt="Watermark Logo" className="w-96 h-96 object-contain rounded-3xl" />
           </div>
 
           <div className="relative z-10 max-w-3xl mx-auto">
@@ -86,7 +100,7 @@ export default function Contact() {
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-obsidian border border-gold-antique/50 text-gold-champagne font-mono text-xs mb-10"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-obsidian border border-gold-antique/50 text-gold-champagne font-mono text-xs mb-10 shadow-gold-glow"
             >
               <Mail className="w-4 h-4 text-gold-champagne" />
               <span>girishmasade26@gmail.com</span>
@@ -100,12 +114,13 @@ export default function Contact() {
               transition={{ delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center justify-center gap-4"
             >
-              <button
+              <MagneticButton
                 onClick={() => setIsModalOpen(true)}
-                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gold-gradient text-obsidian font-display font-bold text-sm tracking-wider shadow-gold-glow hover:scale-105 transition-all flex items-center justify-center gap-2"
+                maxOffset={10}
+                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gold-gradient text-obsidian font-display font-bold text-sm tracking-wider shadow-gold-glow hover:brightness-110 transition-all flex items-center justify-center gap-2"
               >
                 <Mail className="w-4 h-4" /> START A CONVERSATION
-              </button>
+              </MagneticButton>
               <a
                 href="https://github.com"
                 target="_blank"
@@ -130,10 +145,10 @@ export default function Contact() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6 border-t border-steelgray/40 pt-8 text-center sm:text-left">
           
           <div className="flex items-center gap-3">
-            <img src="/gm_logo.png" alt="GM Developer Logo" className="w-10 h-10 object-contain" />
+            <img src="/favicon.png" alt="devCoder Logo" className="w-10 h-10 object-contain rounded-lg" />
             <div>
               <h4 className="font-display font-bold text-sm text-ivory">GIRISH MASADE</h4>
-              <p className="font-mono text-[10px] text-gold-champagne tracking-widest">
+              <p className="font-mono text-[10px] text-gold-champagne tracking-widest font-semibold">
                 girishmasade26@gmail.com
               </p>
             </div>
@@ -144,7 +159,7 @@ export default function Contact() {
           </div>
 
           <div className="font-mono text-xs text-silver/70">
-            © 2026 GM DEVELOPER. ALL RIGHTS RESERVED.
+            © 2026 devCoder. ALL RIGHTS RESERVED.
           </div>
 
         </div>
@@ -285,12 +300,29 @@ export default function Contact() {
                   />
                 </div>
 
+                {/* Error Banner if any */}
+                {errorMessage && (
+                  <div className="p-3.5 rounded-xl bg-red-950/60 border border-red-500/50 text-red-200 font-mono text-xs flex items-center gap-2">
+                    <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+                    <span>{errorMessage}</span>
+                  </div>
+                )}
+
                 {/* Submit */}
                 <button
                   type="submit"
-                  className="mt-2 w-full py-4 rounded-xl bg-gold-gradient text-obsidian font-display font-bold text-sm tracking-wider shadow-gold-glow hover:brightness-110 transition-all flex items-center justify-center gap-2"
+                  disabled={isSubmitting}
+                  className="mt-2 w-full py-4 rounded-xl bg-gold-gradient text-obsidian font-display font-bold text-sm tracking-wider shadow-gold-glow hover:brightness-110 transition-all flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  <Send className="w-4 h-4" /> SEND MESSAGE NOW
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin text-obsidian" /> SENDING MESSAGE...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" /> SEND MESSAGE NOW
+                    </>
+                  )}
                 </button>
               </form>
             </motion.div>

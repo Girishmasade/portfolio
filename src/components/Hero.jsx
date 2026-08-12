@@ -4,6 +4,7 @@ import { ArrowDown } from "lucide-react";
 import { animate, createTimeline } from "animejs";
 import HeroCanvas from "./3D/HeroCanvas";
 import ProfilePortrait from "./ProfilePortrait";
+import MagneticButton from "./ui/MagneticButton";
 
 export default function Hero() {
   const titleRef = useRef(null);
@@ -146,7 +147,7 @@ export default function Hero() {
             <div className="anime-hero-badge opacity-0 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-graphite/80 border border-gold-antique/40 backdrop-blur-md">
               <span className="w-2 h-2 rounded-full bg-gold-champagne animate-pulse" />
               <span className="font-mono text-xs text-gold-champagne tracking-widest uppercase">
-                Girish Masade — GM Developer
+                Girish Masade — devCoder
               </span>
             </div>
 
@@ -185,18 +186,20 @@ export default function Hero() {
             </div>
 
             <div className="anime-hero-cta opacity-0 flex flex-col sm:flex-row items-start gap-4">
-              <button
+              <MagneticButton
                 onClick={scrollToWork}
-                className="px-8 py-4 rounded-xl bg-gold-gradient text-obsidian font-display font-bold text-sm tracking-wider shadow-gold-glow hover:scale-105 transition-all duration-300"
+                maxOffset={10}
+                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gold-gradient text-obsidian font-display font-bold text-sm tracking-wider shadow-gold-glow hover:brightness-110 transition-all duration-300 text-center"
               >
                 EXPLORE MY WORK
-              </button>
-              <button
+              </MagneticButton>
+              <MagneticButton
                 onClick={scrollToStack}
-                className="px-8 py-4 rounded-xl bg-graphite border border-steelgray text-ivory font-display font-semibold text-sm tracking-wider hover:border-gold-antique hover:text-gold-champagne transition-all duration-300"
+                maxOffset={10}
+                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-graphite border border-steelgray text-ivory font-display font-semibold text-sm tracking-wider hover:border-gold-antique hover:text-gold-champagne transition-all duration-300 text-center"
               >
-                SYSTEM ARCHITECTURE
-              </button>
+                VIEW TECH STACK
+              </MagneticButton>
             </div>
           </div>
 
@@ -206,18 +209,6 @@ export default function Hero() {
 
       {/* Vignette Overlay */}
       <div className="absolute inset-0 bg-linear-to-b from-obsidian/70 via-transparent to-obsidian pointer-events-none z-10" />
-
-      {/* System Status UI */}
-      <div className="absolute top-6 left-6 z-20 text-xs font-mono uppercase tracking-[0.3em] text-silver flex flex-col gap-3 pointer-events-none">
-        <div className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-graphite/80 border border-gold-antique/30 shadow-[0_0_30px_-18px_rgba(226,189,122,0.35)] backdrop-blur-xl">
-          <span className="w-2.5 h-2.5 rounded-full bg-gold-champagne animate-pulse" />
-          <span>SYSTEM ONLINE</span>
-        </div>
-        <div className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-graphite/80 border border-steelgray/30">
-          <span className="w-2.5 h-2.5 rounded-full bg-emerald-400/90 animate-pulse" />
-          <span>API CONNECTED</span>
-        </div>
-      </div>
 
       {/* Scroll Indicator */}
       <div
@@ -229,7 +220,7 @@ export default function Hero() {
         }
       >
         <span className="font-mono text-[10px] tracking-widest text-silver uppercase">
-          SCROLL TO EXPLORE
+          SCROLL DOWN
         </span>
         <motion.div
           animate={{ y: [0, 6, 0] }}

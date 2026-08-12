@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 export default function Preloader({ onComplete }) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
+    // Fast cinematic loading timer target: ~1.2s total
     const timer = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(timer);
-          setTimeout(onComplete, 500);
+          setTimeout(onComplete, 250);
           return 100;
         }
-        return prev + 2;
+        return prev + 5;
       });
-    }, 25);
+    }, 30);
 
     return () => clearInterval(timer);
   }, [onComplete]);
@@ -22,55 +23,74 @@ export default function Preloader({ onComplete }) {
   return (
     <motion.div
       initial={{ opacity: 1 }}
-      exit={{ opacity: 0, transition: { duration: 0.8, ease: 'easeInOut' } }}
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-obsidian select-none"
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5, ease: 'easeInOut' }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-obsidian select-none overflow-hidden"
     >
-      <div className="relative flex flex-col items-center">
-        {/* GM Logo container with subtle gold light sweep */}
-        <div className="relative mb-8 w-24 h-24 md:w-32 md:h-32 flex items-center justify-center rounded-2xl bg-graphite border border-steelgray/40 shadow-2xl overflow-hidden">
+      {/* Top Split Panel */}
+      <motion.div
+        exit={{ y: '-100%' }}
+        transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
+        className="absolute top-0 left-0 w-full h-1/2 bg-obsidian border-b border-steelgray/30 z-10"
+      />
+      {/* Bottom Split Panel */}
+      <motion.div
+        exit={{ y: '100%' }}
+        transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
+        className="absolute bottom-0 left-0 w-full h-1/2 bg-obsidian border-t border-steelgray/30 z-10"
+      />
+
+      <div className="relative z-20 flex flex-col items-center">
+        {/* Favicon Logo container with gold shimmer sweep */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4 }}
+          className="relative mb-6 w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-2xl bg-graphite border border-gold-antique/50 shadow-gold-glow overflow-hidden"
+        >
           <img
-            src="/gm_logo.png"
-            alt="GM Developer Logo"
-            className="w-20 h-20 md:w-28 md:h-28 object-contain"
+            src="/favicon.png"
+            alt="devCoder Logo"
+            className="w-16 h-16 md:w-20 md:h-20 object-contain rounded-xl"
           />
-          {/* Animated shimmer sweep */}
           <motion.div
-            animate={{
-              x: ['-100%', '200%'],
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 2.2,
-              ease: 'easeInOut',
-            }}
-            className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-gold-champagne/20 to-transparent transform -skew-x-12"
+            animate={{ x: ['-100%', '200%'] }}
+            transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
+            className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-gold-champagne/30 to-transparent transform -skew-x-12"
           />
-        </div>
+        </motion.div>
+
+        <motion.span
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="font-mono text-xs text-gold-champagne font-bold uppercase tracking-widest mb-2"
+        >
+          WELCOME
+        </motion.span>
 
         <motion.h2 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="font-display text-xl md:text-2xl font-bold tracking-widest text-ivory mb-2"
+          transition={{ delay: 0.1 }}
+          className="font-display text-xl md:text-2xl font-black tracking-wider text-ivory mb-6"
         >
-          GM <span className="text-gold-antique">DEVELOPER</span>
+          GIRISH MASADE <span className="text-metallic-gold">PORTFOLIO</span>
         </motion.h2>
 
-        <p className="text-xs uppercase tracking-widest text-silver mb-8 font-mono">
-          Full-Stack & Intelligent Systems
-        </p>
-
         {/* Progress Bar */}
-        <div className="w-64 h-1 bg-graphite rounded-full overflow-hidden border border-steelgray/30 relative">
+        <div className="w-56 md:w-64 h-1 bg-graphite rounded-full overflow-hidden border border-steelgray/40 relative">
           <motion.div
-            className="h-full bg-gradient-to-r from-gold-bronze via-gold-antique to-gold-champagne"
+            className="h-full bg-gold-gradient shadow-gold-glow"
             style={{ width: `${progress}%` }}
           />
         </div>
 
-        <div className="mt-3 font-mono text-xs text-silver">
-          {progress}% ARCHITECTURE LOADING
+        <div className="mt-3 flex items-center justify-between w-56 md:w-64 font-mono text-[11px] text-silver">
+          <span>LOADING EXPERIENCE</span>
+          <span className="text-gold-champagne font-bold">{progress}%</span>
         </div>
       </div>
     </motion.div>
   );
 }
+

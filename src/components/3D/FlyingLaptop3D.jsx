@@ -402,7 +402,7 @@ export default function FlyingLaptop3D({
                 <span className="text-green-400">LATENCY: 1.2ms</span>
               </div>
               <div className="flex items-center gap-1 text-gold-antique font-semibold">
-                <span>GM-DEV 4.0</span>
+                <span>DEVCODER 4.0</span>
               </div>
             </div>
           </div>

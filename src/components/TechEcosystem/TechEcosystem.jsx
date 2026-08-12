@@ -97,9 +97,12 @@ export default function TechEcosystem() {
               if (catNodes.length === 0) return null;
 
               return (
-                <div
+                <motion.div
                   key={category}
-                  className="anime-reveal glass-panel p-5 rounded-2xl border border-steelgray/40 relative overflow-hidden"
+                  whileHover={{ y: -6, rotateX: 2, rotateY: -2 }}
+                  transition={{ duration: 0.3 }}
+                  style={{ perspective: 1200 }}
+                  className="anime-reveal glass-panel p-5 rounded-2xl border border-steelgray/40 hover:border-gold-antique/60 hover:shadow-gold-glow relative overflow-hidden transition-colors"
                 >
                   <div className="flex items-center justify-between mb-4 border-b border-steelgray/40 pb-2">
                     <h4 className="font-mono text-xs font-bold text-gold-champagne tracking-widest uppercase">
@@ -137,7 +140,7 @@ export default function TechEcosystem() {
                       );
                     })}
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>

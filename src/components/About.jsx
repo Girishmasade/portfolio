@@ -44,18 +44,18 @@ export default function About() {
   const [activeLayer, setActiveLayer] = useState(0);
 
   return (
-    <section id="about" className="relative py-28 bg-graphite border-t border-steelgray/40">
+    <section id="about" className="relative py-24 bg-graphite border-t border-steelgray/40">
       <div className="max-w-6xl mx-auto px-6">
         
         {/* Section Header */}
-        <div className="mb-20 text-center max-w-3xl mx-auto">
+        <div className="mb-16 text-center max-w-3xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-steel border border-steelgray/50 text-gold-champagne font-mono text-xs mb-4"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-steel border border-steelgray/60 text-gold-champagne font-mono text-xs font-semibold mb-4"
           >
-            SYSTEM ARCHITECTURE & PHILOSOPHY
+            ARCHITECTURE & ENGINEERING PHILOSOPHY
           </motion.div>
           
           <motion.h2
@@ -75,14 +75,14 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-silver text-sm sm:text-base leading-relaxed"
+            className="text-silver text-sm sm:text-base leading-relaxed font-sans"
           >
             I build products across the complete development lifecycle — from interactive frontend experiences to scalable backend services, intelligent AI workflows, databases, caching, authentication, and real-time communication.
           </motion.p>
         </div>
 
-        {/* 3D Layered Architecture Visualizer */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        {/* Crisp, Sharp Layered Architecture Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
           {/* Layer Controls */}
           <div className="lg:col-span-5 flex flex-col gap-3">
@@ -90,73 +90,77 @@ export default function About() {
               const Icon = layer.icon;
               const isSelected = activeLayer === idx;
               return (
-                <motion.button
+                <button
                   key={layer.num}
+                  type="button"
                   onClick={() => setActiveLayer(idx)}
-                  whileHover={{ x: 6 }}
-                  className={`p-4 rounded-xl text-left transition-all duration-300 flex items-center gap-4 ${
+                  className={`p-4 rounded-2xl text-left transition-all duration-200 flex items-center gap-4 cursor-pointer select-none relative z-10 ${
                     isSelected
-                      ? 'bg-steel border-2 border-gold-antique shadow-gold-glow'
-                      : 'bg-obsidian/60 border border-steelgray/40 hover:border-steelgray'
+                      ? 'bg-steel border-2 border-gold-antique shadow-gold-glow text-ivory scale-[1.02]'
+                      : 'bg-obsidian border border-steelgray/60 hover:border-gold-antique/50 hover:bg-steel/40 text-silver'
                   }`}
                 >
-                  <span className={`font-mono text-sm font-bold ${isSelected ? 'text-gold-champagne' : 'text-silver'}`}>
+                  <span className={`font-mono text-sm font-bold ${isSelected ? 'text-gold-champagne' : 'text-gold-antique/70'}`}>
                     {layer.num}
                   </span>
-                  <div className="w-10 h-10 rounded-lg bg-graphite flex items-center justify-center border border-steelgray/50">
-                    <Icon className={`w-5 h-5 ${isSelected ? 'text-gold-champagne' : 'text-silver'}`} />
+                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center border shrink-0 transition-colors ${
+                    isSelected
+                      ? 'bg-graphite border-gold-antique text-gold-champagne shadow-gold-glow'
+                      : 'bg-graphite/80 border-steelgray/60 text-silver'
+                  }`}>
+                    <Icon className="w-5 h-5" />
                   </div>
-                  <div>
-                    <h4 className={`font-display font-bold text-sm ${isSelected ? 'text-ivory' : 'text-silver'}`}>
+                  <div className="flex-1 min-w-0">
+                    <h4 className={`font-display font-bold text-sm tracking-wide ${isSelected ? 'text-ivory font-extrabold' : 'text-silver'}`}>
                       {layer.title}
                     </h4>
-                    <p className="text-xs text-silver/70 line-clamp-1">
+                    <p className="text-xs text-silver/80 truncate font-sans mt-0.5">
                       {layer.desc}
                     </p>
                   </div>
-                </motion.button>
+                </button>
               );
             })}
           </div>
 
-          {/* Active Layer Details & 3D Layer Visual */}
-          <div className="lg:col-span-7">
+          {/* Active Layer Details & Crisp Visual Card */}
+          <div className="lg:col-span-7 flex">
             <motion.div
               key={activeLayer}
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4 }}
-              className="glass-panel-gold p-8 rounded-2xl relative overflow-hidden"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="w-full bg-obsidian border-2 border-gold-antique/60 rounded-3xl p-8 md:p-10 relative overflow-hidden flex flex-col justify-between shadow-2xl"
             >
               {/* Background watermark number */}
-              <span className="absolute right-4 bottom-2 text-9xl font-black font-display text-steelgray/10 select-none">
+              <span className="absolute right-6 bottom-4 text-9xl font-black font-display text-steelgray/15 select-none pointer-events-none">
                 {layersData[activeLayer].num}
               </span>
 
               <div className="relative z-10">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-gold-bronze/30 text-gold-champagne font-mono text-xs font-semibold">
+                <div className="flex items-center justify-between mb-6 pb-4 border-b border-steelgray/50">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-bronze/40 border border-gold-antique/50 text-gold-champagne font-mono text-xs font-bold tracking-wider">
                     LAYER {layersData[activeLayer].num} ACTIVE
                   </div>
-                  <span className="font-mono text-xs text-silver">RECONNECTING ARCHITECTURE</span>
+                  <span className="font-mono text-xs text-silver font-semibold">DEVCODER SYSTEM ARCHITECTURE</span>
                 </div>
 
-                <h3 className="font-display font-bold text-2xl md:text-3xl text-ivory mb-4">
+                <h3 className="font-display font-black text-2xl md:text-4xl text-ivory mb-4 tracking-tight">
                   {layersData[activeLayer].title}
                 </h3>
 
-                <p className="text-silver text-sm md:text-base leading-relaxed mb-6">
+                <p className="text-silver text-sm md:text-base leading-relaxed mb-8 font-sans">
                   {layersData[activeLayer].desc}
                 </p>
 
-                <h5 className="font-mono text-xs text-gold-champagne tracking-wider uppercase mb-3">
-                  Key Technologies & Standards
+                <h5 className="font-mono text-xs font-bold text-gold-champagne tracking-widest uppercase mb-4">
+                  KEY TECHNOLOGIES & STANDARDS
                 </h5>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2.5">
                   {layersData[activeLayer].tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-3 py-1.5 rounded-lg bg-obsidian/80 border border-steelgray/60 text-ivory font-mono text-xs"
+                      className="px-3.5 py-2 rounded-xl bg-steel border border-steelgray text-ivory font-mono text-xs font-semibold tracking-wide shadow-sm"
                     >
                       {tag}
                     </span>
@@ -172,3 +176,5 @@ export default function About() {
     </section>
   );
 }
+
+

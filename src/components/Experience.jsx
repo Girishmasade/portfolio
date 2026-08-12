@@ -1,11 +1,11 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Briefcase, Calendar, Code, CheckCircle2 } from 'lucide-react';
+import React, { useRef } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
+import { Briefcase, CheckCircle2 } from 'lucide-react';
 
 const experiences = [
   {
     role: 'Full-Stack Developer & AI Systems Engineer',
-    company: 'GM Developer / Freelance & SaaS Products',
+    company: 'devCoder / Freelance & SaaS Products',
     period: '2023 — PRESENT',
     desc: 'Architecting scalable MERN & AI microservices, RAG vector pipelines, and low latency WebSockets for enterprise clients and SaaS products.',
     highlights: [
@@ -42,8 +42,15 @@ const experiences = [
 ];
 
 export default function Experience() {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start end', 'end start'],
+  });
+  const scaleY = useSpring(scrollYProgress, { stiffness: 200, damping: 25 });
+
   return (
-    <section id="experience" className="relative py-28 bg-obsidian text-ivory">
+    <section id="experience" ref={containerRef} className="relative py-28 bg-obsidian text-ivory">
       <div className="max-w-6xl mx-auto px-6">
         
         {/* Header */}
@@ -78,26 +85,34 @@ export default function Experience() {
           </motion.p>
         </div>
 
-        {/* Timeline */}
-        <div className="relative border-l-2 border-steelgray/40 ml-4 md:ml-32 space-y-12">
+        {/* Timeline Container */}
+        <div className="relative border-l-2 border-steelgray/30 ml-4 md:ml-32 space-y-12">
+          {/* Scroll Progress Line Fill */}
+          <motion.div
+            style={{ scaleY, transformOrigin: 'top' }}
+            className="absolute -left-[2px] top-0 w-[2px] h-full bg-gold-gradient shadow-gold-glow"
+          />
+
           {experiences.map((exp, idx) => (
             <motion.div
               key={exp.role}
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.6, delay: idx * 0.15 }}
               className="relative pl-8 md:pl-12 group"
             >
-              {/* Timeline Node Ring */}
-              <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-graphite border-2 border-gold-antique group-hover:border-gold-champagne group-hover:bg-gold-champagne transition-all shadow-gold-glow" />
+              {/* Timeline Node Ring with Pulsing Gold Light */}
+              <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-graphite border-2 border-gold-antique group-hover:border-gold-champagne group-hover:bg-gold-champagne transition-all shadow-gold-glow">
+                <span className="absolute inset-0 rounded-full bg-gold-champagne/40 animate-ping opacity-75" />
+              </div>
 
               {/* Period Pill (Desktop floating left) */}
               <span className="hidden md:block absolute -left-36 top-1 font-mono text-xs font-bold text-gold-champagne bg-steel px-3 py-1 rounded border border-steelgray/50 text-right w-28">
                 {exp.period}
               </span>
 
-              <div className="glass-panel p-6 md:p-8 rounded-2xl border border-steelgray/50 group-hover:border-gold-antique/50 transition-all">
+              <div className="glass-panel p-6 md:p-8 rounded-2xl border border-steelgray/50 group-hover:border-gold-antique/60 group-hover:shadow-gold-glow transition-all duration-300">
                 <span className="md:hidden inline-block font-mono text-xs font-bold text-gold-champagne bg-steel px-2.5 py-0.5 rounded border border-steelgray/50 mb-3">
                   {exp.period}
                 </span>
@@ -127,7 +142,7 @@ export default function Experience() {
 
                 <div className="flex flex-wrap gap-1.5">
                   {exp.tech.map((t) => (
-                    <span key={t} className="px-2.5 py-1 bg-obsidian border border-steelgray/40 rounded text-ivory font-mono text-[11px]">
+                    <span key={t} className="px-2.5 py-1 bg-obsidian border border-steelgray/40 rounded text-ivory font-mono text-[11px] hover:border-gold-antique/50 transition-colors">
                       {t}
                     </span>
                   ))}
@@ -141,3 +156,4 @@ export default function Experience() {
     </section>
   );
 }
+
