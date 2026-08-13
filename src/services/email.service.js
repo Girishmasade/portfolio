@@ -20,17 +20,18 @@ export const sendContactEmail = async (formData) => {
     throw new Error('Email service configuration is incomplete.');
   }
 
-  const templateParams = {
-    from_name: `${formData.firstName} ${formData.lastName}`.trim(),
-    first_name: formData.firstName,
-    last_name: formData.lastName,
-    from_email: formData.email,
-    reply_to: formData.email,
-    phone: formData.phone,
-    subject: formData.subject,
-    message: formData.message,
-    to_name: 'Girish Masade',
-  };
+const templateParams = {
+  from_name: `${formData.firstName} ${formData.lastName}`.trim(),
+  first_name: formData.firstName,
+  last_name: formData.lastName,
+  email: formData.email,        // add this
+  from_email: formData.email,
+  reply_to: formData.email,
+  phone: formData.phone,
+  subject: formData.subject,
+  message: formData.message,
+  to_name: 'Girish Masade',
+};
 
   const response = await emailjs.send(
     SERVICE_ID,
