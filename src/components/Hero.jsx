@@ -133,7 +133,7 @@ export default function Hero() {
     <section
       id="hero"
       ref={heroRef}
-      className="relative w-full h-screen min-h-175 flex items-center justify-center bg-obsidian overflow-hidden"
+      className="relative w-full min-h-screen pt-32 sm:pt-36 lg:pt-36 pb-20 sm:pb-24 lg:pb-24 flex items-center justify-center bg-obsidian overflow-hidden"
       style={{ perspective: 1700 }}
     >
       {/* Background 3D Scene */}
@@ -141,19 +141,20 @@ export default function Hero() {
         <HeroCanvas />
       </div>
 
-      <div className="relative z-20 max-w-7xl mx-auto px-6 h-full flex items-center justify-center py-16">
-        <div className="grid w-full grid-cols-1 gap-12 lg:grid-cols-[1.4fr_1fr] items-center">
-          <div className="space-y-8">
-            <div className="anime-hero-badge opacity-0 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-graphite/80 border border-gold-antique/40 backdrop-blur-md">
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 w-full flex flex-col justify-center">
+        <div className="grid w-full grid-cols-1 gap-8 md:gap-10 lg:gap-12 md:grid-cols-[1.4fr_1fr] items-start">
+          {/* Main Hero Content */}
+          <div className="space-y-6 sm:space-y-8">
+            <div className="anime-hero-badge opacity-0 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-graphite/80 border border-gold-antique/40 backdrop-blur-md">
               <span className="w-2 h-2 rounded-full bg-gold-champagne animate-pulse" />
-              <span className="font-mono text-xs text-gold-champagne tracking-widest uppercase">
-                Girish Masade — devCoder
+              <span className="font-mono text-[11px] sm:text-xs text-gold-champagne tracking-widest uppercase">
+                FULL-STACK & AI SYSTEMS ENGINEER
               </span>
             </div>
 
-            <h1 className="anime-hero-title font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-ivory leading-none max-w-3xl">
+            <h1 className="anime-hero-title font-display font-black text-3xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-ivory leading-tight max-w-3xl break-words">
               <span className="inline-block opacity-0">I BUILD</span>
-              <br className="hidden sm:block" />
+              <br className="hidden sm:block" />{" "}
               <span className="inline-block opacity-0 text-metallic-gold">
                 DIGITAL SYSTEMS
               </span>
@@ -161,49 +162,57 @@ export default function Hero() {
               <span className="inline-block opacity-0">THAT SCALE.</span>
             </h1>
 
+            {/* Profile Portrait displayed right under title on Mobile */}
+            <div className="md:hidden py-2 flex justify-center">
+              <ProfilePortrait src="/dev.png" />
+            </div>
+
             <p className="anime-hero-desc opacity-0 text-silver text-sm sm:text-base md:text-lg max-w-2xl leading-relaxed font-sans">
               Full-Stack Developer crafting high-performance AI products, SaaS
               platforms, real-time applications, and resilient backend
               architectures.
             </p>
 
-            <div className="flex flex-wrap items-center gap-3 font-mono text-xs text-gold-antique/90">
-              <span className="anime-hero-tag opacity-0 px-3 py-1 bg-steel/60 border border-steelgray/40 rounded-lg">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 font-mono text-xs text-gold-antique/90">
+              <span className="anime-hero-tag opacity-0 px-2.5 sm:px-3 py-1 bg-steel/60 border border-steelgray/40 rounded-lg">
                 MERN
               </span>
               <span className="text-silver font-bold">×</span>
-              <span className="anime-hero-tag opacity-0 px-3 py-1 bg-steel/60 border border-steelgray/40 rounded-lg">
+              <span className="anime-hero-tag opacity-0 px-2.5 sm:px-3 py-1 bg-steel/60 border border-steelgray/40 rounded-lg">
                 AI ARCHITECTURE
               </span>
               <span className="text-silver font-bold">×</span>
-              <span className="anime-hero-tag opacity-0 px-3 py-1 bg-steel/60 border border-steelgray/40 rounded-lg">
+              <span className="anime-hero-tag opacity-0 px-2.5 sm:px-3 py-1 bg-steel/60 border border-steelgray/40 rounded-lg">
                 SAAS
               </span>
               <span className="text-silver font-bold">×</span>
-              <span className="anime-hero-tag opacity-0 px-3 py-1 bg-steel/60 border border-steelgray/40 rounded-lg">
+              <span className="anime-hero-tag opacity-0 px-2.5 sm:px-3 py-1 bg-steel/60 border border-steelgray/40 rounded-lg">
                 REAL-TIME
               </span>
             </div>
 
-            <div className="anime-hero-cta opacity-0 flex flex-col sm:flex-row items-start gap-4">
+            <div className="anime-hero-cta opacity-0 flex flex-col sm:flex-row items-stretch sm:items-start gap-3 sm:gap-4 pt-2">
               <MagneticButton
                 onClick={scrollToWork}
                 maxOffset={10}
-                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gold-gradient text-obsidian font-display font-bold text-sm tracking-wider shadow-gold-glow hover:brightness-110 transition-all duration-300 text-center"
+                className="w-full sm:w-auto px-8 py-3.5 sm:py-4 rounded-xl bg-gold-gradient text-obsidian font-display font-bold text-sm tracking-wider shadow-gold-glow hover:brightness-110 transition-all duration-300 text-center"
               >
                 EXPLORE MY WORK
               </MagneticButton>
               <MagneticButton
                 onClick={scrollToStack}
                 maxOffset={10}
-                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-graphite border border-steelgray text-ivory font-display font-semibold text-sm tracking-wider hover:border-gold-antique hover:text-gold-champagne transition-all duration-300 text-center"
+                className="w-full sm:w-auto px-8 py-3.5 sm:py-4 rounded-xl bg-graphite border border-steelgray text-ivory font-display font-semibold text-sm tracking-wider hover:border-gold-antique hover:text-gold-champagne transition-all duration-300 text-center"
               >
                 VIEW TECH STACK
               </MagneticButton>
             </div>
           </div>
 
-          <ProfilePortrait src="/dev.png" className="mx-auto lg:mx-0" />
+          {/* Profile Portrait displayed aligned at Top Right on Laptop & Desktop */}
+          <div className="hidden md:flex justify-end self-start pt-2">
+            <ProfilePortrait src="/dev.png" />
+          </div>
         </div>
       </div>
 

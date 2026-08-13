@@ -119,40 +119,50 @@ export default function Navbar({ activeSection, setActiveSection }) {
         </div>
       </motion.header>
 
-      {/* Mobile Navigation Drawer */}
+      {/* Mobile Navigation Drawer & Backdrop */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-x-4 top-20 z-50 md:hidden bg-graphite/95 backdrop-blur-2xl border border-gold-antique/50 rounded-3xl p-6 shadow-2xl"
-          >
-            <div className="flex flex-col gap-3">
-              {navItems.map((item) => {
-                const isActive = activeSection === item.id;
-                return (
-                  <button
-                    key={item.id}
-                    onClick={() => scrollToSection(item.id)}
-                    className={`w-full text-left px-4 py-3 rounded-xl text-sm font-mono tracking-wider transition-all ${
-                      isActive
-                        ? 'bg-steel border border-gold-antique text-gold-champagne font-bold'
-                        : 'text-silver hover:bg-steel/50 hover:text-ivory'
-                    }`}
-                  >
-                    {item.label}
-                  </button>
-                );
-              })}
-              <button
-                onClick={() => scrollToSection('contact')}
-                className="w-full mt-2 py-3 rounded-xl bg-gold-gradient text-obsidian font-display font-bold text-sm tracking-wider shadow-gold-glow text-center"
-              >
-                LET'S TALK
-              </button>
-            </div>
-          </motion.div>
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileMenuOpen(false)}
+              className="fixed inset-0 bg-obsidian/75 backdrop-blur-md z-40 md:hidden"
+            />
+            <motion.div
+              initial={{ opacity: 0, y: -20, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -20, scale: 0.98 }}
+              className="fixed inset-x-4 top-20 z-50 md:hidden bg-graphite/95 backdrop-blur-2xl border border-gold-antique/50 rounded-3xl p-5 sm:p-6 shadow-2xl max-h-[80vh] overflow-y-auto"
+            >
+              <div className="flex flex-col gap-2.5">
+                {navItems.map((item) => {
+                  const isActive = activeSection === item.id;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => scrollToSection(item.id)}
+                      className={`w-full text-left px-4 py-3.5 rounded-xl text-sm font-mono tracking-wider transition-all flex items-center justify-between min-h-[44px] ${
+                        isActive
+                          ? 'bg-steel border border-gold-antique text-gold-champagne font-bold shadow-sm'
+                          : 'text-silver hover:bg-steel/50 hover:text-ivory'
+                      }`}
+                    >
+                      <span>{item.label}</span>
+                      {isActive && <span className="w-2 h-2 rounded-full bg-gold-champagne" />}
+                    </button>
+                  );
+                })}
+                <button
+                  onClick={() => scrollToSection('contact')}
+                  className="w-full mt-2 py-3.5 rounded-xl bg-gold-gradient text-obsidian font-display font-bold text-sm tracking-wider shadow-gold-glow text-center min-h-[44px]"
+                >
+                  LET'S TALK
+                </button>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

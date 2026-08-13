@@ -50,16 +50,16 @@ export default function Experience() {
   const scaleY = useSpring(scrollYProgress, { stiffness: 200, damping: 25 });
 
   return (
-    <section id="experience" ref={containerRef} className="relative py-28 bg-obsidian text-ivory">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="experience" ref={containerRef} className="relative py-20 sm:py-28 bg-obsidian text-ivory">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded bg-graphite border border-gold-antique/40 font-mono text-xs text-gold-champagne mb-4"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded bg-graphite border border-gold-antique/40 font-mono text-[11px] sm:text-xs text-gold-champagne mb-4"
           >
             CAREER & ENGINEERING TRACK RECORD
           </motion.div>
@@ -69,7 +69,7 @@ export default function Experience() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="font-display font-black text-3xl sm:text-5xl text-ivory tracking-tight leading-tight mb-6"
+            className="font-display font-black text-3xl sm:text-5xl text-ivory tracking-tight leading-tight mb-4 sm:mb-6"
           >
             CINEMATIC <span className="text-metallic-gold">EXPERIENCE TIMELINE.</span>
           </motion.h2>
@@ -79,14 +79,14 @@ export default function Experience() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-silver text-sm sm:text-base leading-relaxed"
+            className="text-silver text-xs sm:text-sm md:text-base leading-relaxed font-sans"
           >
             A timeline of building production software across frontend, backend, AI integration, and real-time infrastructure.
           </motion.p>
         </div>
 
         {/* Timeline Container */}
-        <div className="relative border-l-2 border-steelgray/30 ml-4 md:ml-32 space-y-12">
+        <div className="relative border-l-2 border-steelgray/30 ml-2 sm:ml-4 md:ml-32 space-y-10 sm:space-y-12">
           {/* Scroll Progress Line Fill */}
           <motion.div
             style={{ scaleY, transformOrigin: 'top' }}
@@ -100,7 +100,7 @@ export default function Experience() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.6, delay: idx * 0.15 }}
-              className="relative pl-8 md:pl-12 group"
+              className="relative pl-6 sm:pl-8 md:pl-12 group"
             >
               {/* Timeline Node Ring with Pulsing Gold Light */}
               <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-graphite border-2 border-gold-antique group-hover:border-gold-champagne group-hover:bg-gold-champagne transition-all shadow-gold-glow">
@@ -112,26 +112,26 @@ export default function Experience() {
                 {exp.period}
               </span>
 
-              <div className="glass-panel p-6 md:p-8 rounded-2xl border border-steelgray/50 group-hover:border-gold-antique/60 group-hover:shadow-gold-glow transition-all duration-300">
-                <span className="md:hidden inline-block font-mono text-xs font-bold text-gold-champagne bg-steel px-2.5 py-0.5 rounded border border-steelgray/50 mb-3">
+              <div className="glass-panel p-5 sm:p-6 md:p-8 rounded-2xl border border-steelgray/50 group-hover:border-gold-antique/60 group-hover:shadow-gold-glow transition-all duration-300">
+                <span className="md:hidden inline-block font-mono text-[11px] sm:text-xs font-bold text-gold-champagne bg-steel px-2.5 py-0.5 rounded border border-steelgray/50 mb-3">
                   {exp.period}
                 </span>
 
-                <h3 className="font-display font-bold text-xl md:text-2xl text-ivory mb-1">
+                <h3 className="font-display font-bold text-lg sm:text-xl md:text-2xl text-ivory mb-1">
                   {exp.role}
                 </h3>
-                <h4 className="font-mono text-xs text-gold-champagne font-semibold mb-4 flex items-center gap-2">
+                <h4 className="font-mono text-xs text-gold-champagne font-semibold mb-3 sm:mb-4 flex items-center gap-2">
                   <Briefcase className="w-3.5 h-3.5" /> {exp.company}
                 </h4>
 
-                <p className="text-silver text-sm leading-relaxed mb-6">
+                <p className="text-silver text-xs sm:text-sm leading-relaxed mb-5 sm:mb-6 font-sans">
                   {exp.desc}
                 </p>
 
                 <h5 className="font-mono text-[10px] text-gold-antique font-bold uppercase tracking-wider mb-2">
                   ENGINEERING ACHIEVEMENTS:
                 </h5>
-                <ul className="space-y-1.5 mb-6">
+                <ul className="space-y-1.5 mb-5 sm:mb-6">
                   {exp.highlights.map((h, i) => (
                     <li key={i} className="flex items-start gap-2 font-mono text-xs text-silver">
                       <CheckCircle2 className="w-4 h-4 text-gold-champagne shrink-0 mt-0.5" />

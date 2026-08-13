@@ -88,7 +88,7 @@ function ProjectCard({ project, idx, setSelectedProject }) {
   const Icon = project.icon;
 
   const handlePointerMove = (e) => {
-    if (!cardRef.current) return;
+    if (e.pointerType !== 'mouse' || !cardRef.current) return;
     const { left, top, width, height } = cardRef.current.getBoundingClientRect();
     const x = (e.clientX - left) / width - 0.5;
     const y = (e.clientY - top) / height - 0.5;
@@ -117,7 +117,7 @@ function ProjectCard({ project, idx, setSelectedProject }) {
       style={{
         perspective: 1200,
       }}
-      className="anime-reveal glass-panel-gold p-8 md:p-12 rounded-3xl relative overflow-hidden group hover:border-gold-champagne transition-all duration-300 cursor-pointer"
+      className="anime-reveal glass-panel-gold p-6 sm:p-8 md:p-12 rounded-3xl relative overflow-hidden group hover:border-gold-champagne transition-all duration-300 cursor-pointer"
     >
       <motion.div
         animate={{
@@ -129,7 +129,7 @@ function ProjectCard({ project, idx, setSelectedProject }) {
       >
         {/* Layer 1: Background Project Number */}
         <span
-          className="absolute top-4 right-8 font-display font-black text-8xl md:text-9xl text-steelgray/10 group-hover:text-gold-antique/15 transition-colors pointer-events-none select-none"
+          className="absolute top-4 right-6 sm:right-8 font-display font-black text-6xl sm:text-8xl md:text-9xl text-steelgray/10 group-hover:text-gold-antique/15 transition-colors pointer-events-none select-none"
           style={{ transform: `translate3d(${transform.tx * -0.5}px, ${transform.ty * -0.5}px, 0)` }}
         >
           {project.num}
@@ -143,20 +143,20 @@ function ProjectCard({ project, idx, setSelectedProject }) {
               style={{ transform: `translate3d(${transform.tx * 0.4}px, ${transform.ty * 0.4}px, 10px)` }}
               className="transition-transform duration-100"
             >
-              <div className="flex items-center gap-3 mb-4">
-                <span className="px-3 py-1 bg-gold-bronze/40 text-gold-champagne rounded font-mono text-xs font-bold uppercase tracking-wider">
+              <div className="flex items-center gap-3 mb-3 sm:mb-4 flex-wrap">
+                <span className="px-3 py-1 bg-gold-bronze/40 text-gold-champagne rounded font-mono text-[11px] sm:text-xs font-bold uppercase tracking-wider">
                   {project.category}
                 </span>
                 <span className="font-mono text-xs text-silver">PROJECT {project.num}</span>
               </div>
 
-              <h3 className="font-display font-black text-3xl md:text-4xl text-ivory mb-2 group-hover:text-gold-champagne transition-colors">
+              <h3 className="font-display font-black text-2xl sm:text-3xl md:text-4xl text-ivory mb-2 group-hover:text-gold-champagne transition-colors">
                 {project.title}
               </h3>
-              <p className="text-gold-champagne font-mono text-sm font-semibold mb-4">
+              <p className="text-gold-champagne font-mono text-xs sm:text-sm font-semibold mb-4">
                 {project.subtitle}
               </p>
-              <p className="text-silver text-sm md:text-base leading-relaxed mb-6">
+              <p className="text-silver text-xs sm:text-sm md:text-base leading-relaxed mb-6 font-sans">
                 {project.description}
               </p>
             </div>
@@ -166,7 +166,7 @@ function ProjectCard({ project, idx, setSelectedProject }) {
               style={{ transform: `translate3d(${transform.tx * 0.2}px, ${transform.ty * 0.2}px, 5px)` }}
               className="transition-transform duration-100"
             >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6 sm:mb-8">
                 {project.highlights.map((h, i) => (
                   <div key={i} className="flex items-start gap-2 font-mono text-xs text-silver">
                     <span className="w-1.5 h-1.5 rounded-full bg-gold-champagne mt-1.5 shrink-0" />
@@ -175,9 +175,9 @@ function ProjectCard({ project, idx, setSelectedProject }) {
                 ))}
               </div>
 
-              <div className="flex flex-wrap gap-2 mb-8">
+              <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-6 sm:mb-8">
                 {project.stack.map((st) => (
-                  <span key={st} className="px-3 py-1 bg-obsidian/80 border border-steelgray/60 rounded-lg text-ivory font-mono text-xs">
+                  <span key={st} className="px-2.5 sm:px-3 py-1 bg-obsidian/80 border border-steelgray/60 rounded-lg text-ivory font-mono text-[11px] sm:text-xs">
                     {st}
                   </span>
                 ))}
@@ -195,7 +195,7 @@ function ProjectCard({ project, idx, setSelectedProject }) {
                   setSelectedProject(project);
                 }}
                 maxOffset={10}
-                className="px-6 py-3 rounded-xl bg-steel border border-gold-antique/50 text-gold-champagne font-display font-bold text-xs tracking-wider shadow-gold-glow hover:bg-gold-gradient hover:text-obsidian transition-all duration-300 flex items-center gap-2"
+                className="w-full sm:w-auto px-5 sm:px-6 py-3 rounded-xl bg-steel border border-gold-antique/50 text-gold-champagne font-display font-bold text-xs tracking-wider shadow-gold-glow hover:bg-gold-gradient hover:text-obsidian transition-all duration-300 flex items-center justify-center gap-2"
               >
                 EXPLORE CASE STUDY & ARCHITECTURE <ArrowRight className="w-4 h-4" />
               </MagneticButton>
@@ -206,7 +206,7 @@ function ProjectCard({ project, idx, setSelectedProject }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="px-4 py-3 rounded-xl bg-graphite border border-steelgray text-ivory font-mono font-bold text-xs tracking-wider hover:border-gold-antique hover:text-gold-champagne hover:shadow-gold-glow transition-all duration-300 flex items-center gap-2"
+                  className="w-full sm:w-auto px-4 py-3 rounded-xl bg-graphite border border-steelgray text-ivory font-mono font-bold text-xs tracking-wider hover:border-gold-antique hover:text-gold-champagne hover:shadow-gold-glow transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <GithubIcon className="w-4 h-4 text-gold-champagne" /> GITHUB
                 </a>
@@ -215,10 +215,10 @@ function ProjectCard({ project, idx, setSelectedProject }) {
           </div>
 
           {/* Layer 2: Right 3D Visual Box with Image Hover Parallax */}
-          <div className="lg:col-span-5 flex justify-center">
+          <div className="lg:col-span-5 flex justify-center w-full">
             <div
               style={{ transform: `translate3d(${transform.tx * 0.8}px, ${transform.ty * 0.8}px, 20px)` }}
-              className="w-full h-64 md:h-80 rounded-2xl bg-obsidian border border-steelgray/50 relative overflow-hidden flex items-center justify-center p-6 group-hover:border-gold-antique/70 transition-all duration-300"
+              className="w-full h-48 sm:h-64 md:h-80 rounded-2xl bg-obsidian border border-steelgray/50 relative overflow-hidden flex items-center justify-center p-6 group-hover:border-gold-antique/70 transition-all duration-300"
             >
               <div className="absolute inset-0 bg-[radial-gradient(#363A42_1px,transparent_1px)] [background-size:16px_16px] opacity-30" />
               

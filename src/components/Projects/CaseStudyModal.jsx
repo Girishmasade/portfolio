@@ -16,49 +16,49 @@ export default function CaseStudyModal({ project, onClose }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-obsidian/90 backdrop-blur-2xl overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-8 bg-obsidian/90 backdrop-blur-2xl overflow-y-auto"
     >
-      <div className="relative w-full max-w-5xl bg-graphite border border-gold-antique/50 rounded-3xl p-6 md:p-10 text-ivory shadow-2xl my-auto">
+      <div className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-graphite border border-gold-antique/50 rounded-3xl p-5 sm:p-8 md:p-10 text-ivory shadow-2xl my-auto">
         
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 p-3 rounded-full bg-steel border border-steelgray/50 text-silver hover:text-gold-champagne hover:border-gold-antique transition-all"
+          className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2.5 sm:p-3 rounded-full bg-steel border border-steelgray/50 text-silver hover:text-gold-champagne hover:border-gold-antique transition-all z-10"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Header */}
-        <div className="mb-8 border-b border-steelgray/40 pb-6">
-          <span className="px-3 py-1 bg-gold-bronze/40 text-gold-champagne rounded font-mono text-xs font-bold uppercase tracking-wider">
+        <div className="mb-6 sm:mb-8 border-b border-steelgray/40 pb-5 sm:pb-6 pr-10">
+          <span className="px-3 py-1 bg-gold-bronze/40 text-gold-champagne rounded font-mono text-[11px] sm:text-xs font-bold uppercase tracking-wider">
             PROJECT CASE STUDY — {project.num}
           </span>
-          <h2 className="font-display font-black text-3xl sm:text-5xl text-ivory mt-3 mb-2">
+          <h2 className="font-display font-black text-2xl sm:text-4xl md:text-5xl text-ivory mt-3 mb-2">
             {project.title}
           </h2>
-          <p className="text-gold-champagne font-mono text-sm font-semibold">
+          <p className="text-gold-champagne font-mono text-xs sm:text-sm font-semibold">
             {project.subtitle}
           </p>
         </div>
 
         {/* Modal Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8 sm:mb-10">
           <div>
-            <h4 className="font-mono text-xs font-bold text-gold-champagne uppercase tracking-widest mb-2">
+            <h4 className="font-mono text-[11px] sm:text-xs font-bold text-gold-champagne uppercase tracking-widest mb-2">
               OVERVIEW & PROBLEM
             </h4>
-            <p className="text-silver text-sm leading-relaxed mb-6">
+            <p className="text-silver text-xs sm:text-sm leading-relaxed mb-6 font-sans">
               {project.description}
             </p>
 
-            <h4 className="font-mono text-xs font-bold text-gold-champagne uppercase tracking-widest mb-2">
+            <h4 className="font-mono text-[11px] sm:text-xs font-bold text-gold-champagne uppercase tracking-widest mb-2">
               ENGINEERING SOLUTION
             </h4>
-            <p className="text-silver text-sm leading-relaxed mb-6">
+            <p className="text-silver text-xs sm:text-sm leading-relaxed mb-6 font-sans">
               Designed as a high-scalability production platform with multi-layer caching, vector similarity indexes, and robust background queues to guarantee responsive user sessions under high loads.
             </p>
 
-            <h4 className="font-mono text-xs font-bold text-gold-champagne uppercase tracking-widest mb-2">
+            <h4 className="font-mono text-[11px] sm:text-xs font-bold text-gold-champagne uppercase tracking-widest mb-2">
               KEY HIGHLIGHTS & METRICS
             </h4>
             <ul className="flex flex-col gap-2">
@@ -72,26 +72,26 @@ export default function CaseStudyModal({ project, onClose }) {
           </div>
 
           {/* Interactive Architecture Map */}
-          <div className="glass-panel p-6 rounded-2xl border border-steelgray/50 flex flex-col justify-between">
+          <div className="glass-panel p-5 sm:p-6 rounded-2xl border border-steelgray/50 flex flex-col justify-between">
             <div>
               <h4 className="font-mono text-xs font-bold text-gold-champagne uppercase tracking-widest mb-4 flex items-center gap-2">
                 <Cpu className="w-4 h-4" /> LIVE SYSTEM ARCHITECTURE MAP
               </h4>
               
-              <div className="flex flex-col gap-3 font-mono text-xs">
-                <div className="p-3 bg-steel rounded-lg border border-steelgray/50 text-center font-bold text-ivory">
+              <div className="flex flex-col gap-2.5 font-mono text-xs">
+                <div className="p-2.5 sm:p-3 bg-steel rounded-lg border border-steelgray/50 text-center font-bold text-ivory">
                   REACT FRONTEND INTERFACE
                 </div>
                 <ArrowRight className="w-4 h-4 text-gold-champagne self-center rotate-90" />
-                <div className="p-3 bg-steel rounded-lg border border-steelgray/50 text-center font-bold text-ivory">
+                <div className="p-2.5 sm:p-3 bg-steel rounded-lg border border-steelgray/50 text-center font-bold text-ivory">
                   EXPRESS API GATEWAY & AUTH GUARDS
                 </div>
                 <ArrowRight className="w-4 h-4 text-gold-champagne self-center rotate-90" />
-                <div className="p-3 bg-gold-bronze/30 border border-gold-antique text-gold-champagne rounded-lg text-center font-bold">
+                <div className="p-2.5 sm:p-3 bg-gold-bronze/30 border border-gold-antique text-gold-champagne rounded-lg text-center font-bold">
                   SERVICE LAYER + REDIS CACHE
                 </div>
                 <ArrowRight className="w-4 h-4 text-gold-champagne self-center rotate-90" />
-                <div className="p-3 bg-steel rounded-lg border border-steelgray/50 text-center font-bold text-ivory">
+                <div className="p-2.5 sm:p-3 bg-steel rounded-lg border border-steelgray/50 text-center font-bold text-ivory">
                   MONGODB VECTOR SEARCH & AI PROVIDERS
                 </div>
               </div>
@@ -111,13 +111,13 @@ export default function CaseStudyModal({ project, onClose }) {
         </div>
 
         {/* Footer Actions */}
-        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-steelgray/40 pt-6">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 border-t border-steelgray/40 pt-5 sm:pt-6">
           {project.githubUrl ? (
             <a
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3 rounded-xl bg-steel border border-gold-antique/60 text-gold-champagne font-mono font-bold text-xs tracking-wider shadow-gold-glow hover:bg-gold-gradient hover:text-obsidian transition-all duration-300 flex items-center gap-2"
+              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-steel border border-gold-antique/60 text-gold-champagne font-mono font-bold text-xs tracking-wider shadow-gold-glow hover:bg-gold-gradient hover:text-obsidian transition-all duration-300 flex items-center justify-center gap-2"
             >
               <GithubIcon className="w-4 h-4" /> VIEW GITHUB REPOSITORY
             </a>
@@ -125,7 +125,7 @@ export default function CaseStudyModal({ project, onClose }) {
 
           <button
             onClick={onClose}
-            className="px-6 py-3 rounded-xl bg-gold-gradient text-obsidian font-display font-bold text-sm tracking-wider shadow-gold-glow hover:brightness-110"
+            className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gold-gradient text-obsidian font-display font-bold text-sm tracking-wider shadow-gold-glow hover:brightness-110 text-center"
           >
             CLOSE CASE STUDY
           </button>

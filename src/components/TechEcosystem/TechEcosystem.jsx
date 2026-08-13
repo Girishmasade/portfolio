@@ -122,10 +122,12 @@ export default function TechEcosystem() {
                       return (
                         <motion.button
                           key={node.id}
+                          onClick={() => setActiveNode((curr) => (curr?.id === node.id ? null : node))}
                           onMouseEnter={() => setActiveNode(node)}
                           onMouseLeave={() => setActiveNode(null)}
-                          whileHover={{ scale: 1.05 }}
-                          className={`relative px-3 py-2 rounded-xl text-xs font-mono transition-all duration-300 text-left ${
+                          whileHover={{ scale: 1.04 }}
+                          whileTap={{ scale: 0.96 }}
+                          className={`relative px-3 py-2 rounded-xl text-xs font-mono transition-all duration-300 text-left cursor-pointer ${
                             isActive
                               ? 'bg-gold-gradient text-obsidian font-bold shadow-gold-glow z-20'
                               : related
@@ -145,7 +147,7 @@ export default function TechEcosystem() {
             })}
           </div>
 
-          {/* Active Hover Detail Info Card */}
+          {/* Active Hover / Tap Detail Info Card */}
           <div className="mt-6 min-h-[110px]">
             <AnimatePresence mode="wait">
               {activeNode ? (
@@ -154,26 +156,26 @@ export default function TechEcosystem() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="glass-panel-gold p-6 rounded-2xl border border-gold-antique/60 flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
+                  className="glass-panel-gold p-5 sm:p-6 rounded-2xl border border-gold-antique/60 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6"
                 >
                   <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
+                    <div className="flex items-center gap-3 mb-2 flex-wrap">
                       <span className="px-2.5 py-0.5 rounded bg-gold-bronze/40 text-gold-champagne font-mono text-[10px] font-bold uppercase tracking-wider">
                         {activeNode.category}
                       </span>
-                      <h4 className="font-display font-bold text-xl text-ivory">
+                      <h4 className="font-display font-bold text-lg sm:text-xl text-ivory">
                         {activeNode.name}
                       </h4>
                     </div>
                     <p className="text-gold-champagne font-mono text-xs font-semibold mb-1">
                       ROLE: {activeNode.role}
                     </p>
-                    <p className="text-silver text-xs leading-relaxed max-w-3xl">
+                    <p className="text-silver text-xs leading-relaxed max-w-3xl font-sans">
                       {activeNode.usedFor}
                     </p>
                   </div>
 
-                  <div className="flex flex-col gap-1 border-t md:border-t-0 md:border-l border-steelgray/50 pt-3 md:pt-0 md:pl-6">
+                  <div className="flex flex-col gap-1 border-t md:border-t-0 md:border-l border-steelgray/50 pt-3 md:pt-0 md:pl-6 w-full md:w-auto">
                     <span className="font-mono text-[10px] text-gold-antique uppercase font-bold">
                       CONNECTED TECHNOLOGIES:
                     </span>
@@ -193,8 +195,8 @@ export default function TechEcosystem() {
                   </div>
                 </motion.div>
               ) : (
-                <div className="p-6 rounded-2xl bg-graphite/40 border border-steelgray/30 text-center text-silver font-mono text-xs">
-                  Hover over any technology node above to highlight its role and active connections across the stack.
+                <div className="p-5 sm:p-6 rounded-2xl bg-graphite/40 border border-steelgray/30 text-center text-silver font-mono text-xs">
+                  Tap or hover over any technology node above to highlight its role and active connections across the stack.
                 </div>
               )}
             </AnimatePresence>
@@ -204,17 +206,17 @@ export default function TechEcosystem() {
         {/* ---------------------------------------------------- */}
         {/* DEDICATED ARCHITECTURE VISUALIZATIONS */}
         {/* ---------------------------------------------------- */}
-        <div className="border-t border-steelgray/40 pt-20">
-          <div className="anime-reveal text-center mb-12">
-            <h3 className="font-display font-bold text-2xl md:text-4xl text-ivory mb-4">
+        <div className="border-t border-steelgray/40 pt-16 sm:pt-20">
+          <div className="anime-reveal text-center mb-10 sm:mb-12">
+            <h3 className="font-display font-bold text-2xl sm:text-3xl md:text-4xl text-ivory mb-3 sm:mb-4">
               SYSTEM ARCHITECTURE FLOWS
             </h3>
-            <p className="text-silver text-sm max-w-xl mx-auto font-sans">
+            <p className="text-silver text-xs sm:text-sm max-w-xl mx-auto font-sans">
               Select a specialized engineering subsystem below to inspect data movement and visual connections.
             </p>
 
-            {/* Diagram Switcher Tabs */}
-            <div className="mt-8 flex flex-wrap justify-center gap-2">
+            {/* Diagram Switcher Tabs with touch-friendly horizontal scroll */}
+            <div className="mt-6 sm:mt-8 flex overflow-x-auto pb-3 gap-2 scrollbar-none sm:flex-wrap sm:justify-center px-2">
               {[
                 { id: 'frontend', label: 'FRONTEND ARCHITECTURE' },
                 { id: 'backend', label: 'BACKEND CONTROLLER PIPELINE' },
@@ -228,7 +230,7 @@ export default function TechEcosystem() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveDiagram(tab.id)}
-                  className={`px-4 py-2 rounded-xl font-mono text-xs tracking-wider transition-all duration-300 ${
+                  className={`px-3.5 sm:px-4 py-2.5 sm:py-2 rounded-xl font-mono text-xs tracking-wider transition-all duration-300 shrink-0 ${
                     activeDiagram === tab.id
                       ? 'bg-steel border-2 border-gold-antique text-gold-champagne font-bold shadow-gold-glow'
                       : 'bg-graphite border border-steelgray/40 text-silver hover:border-steelgray'
@@ -241,7 +243,7 @@ export default function TechEcosystem() {
           </div>
 
           {/* Diagram Display Container */}
-          <div className="glass-panel-gold p-8 md:p-12 rounded-3xl relative overflow-hidden">
+          <div className="glass-panel-gold p-5 sm:p-8 md:p-12 rounded-3xl relative overflow-hidden">
             <AnimatePresence mode="wait">
               
               {/* FRONTEND ARCHITECTURE */}

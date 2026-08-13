@@ -12,21 +12,21 @@ const statements = [
 
 export default function Philosophy() {
   return (
-    <section className="py-32 bg-graphite border-t border-b border-steelgray/40 text-ivory overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="py-12 sm:py-32 bg-graphite border-t border-b border-steelgray/40 text-ivory overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         
-        <div className="text-center mb-20">
+        <div className="text-center mb-8 sm:mb-20">
           <motion.span
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-mono text-xs text-gold-champagne font-bold tracking-widest uppercase bg-steel/60 px-4 py-1.5 rounded-lg border border-steelgray/40 shadow-sm"
+            className="font-mono text-[11px] sm:text-xs text-gold-champagne font-bold tracking-widest uppercase bg-steel/60 px-3.5 sm:px-4 py-1.5 rounded-lg border border-steelgray/40 shadow-sm"
           >
             THE DIGITAL MANIFESTO & ENGINEERING CREED
           </motion.span>
         </div>
 
-        <div className="flex flex-col gap-24 items-center justify-center">
+        <div className="flex flex-col gap-8 sm:gap-24 items-center justify-center">
           {statements.map((st, idx) => (
             <motion.div
               key={st.line1}
@@ -34,13 +34,13 @@ export default function Philosophy() {
               whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.8, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
-              className="text-center group"
+              className="text-center group w-full"
             >
               <motion.h3
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tighter leading-none text-ivory group-hover:text-gold-light transition-colors duration-300"
+                className="font-display font-black text-2xl xs:text-3xl sm:text-5xl md:text-7xl lg:text-8xl tracking-tight leading-tight text-ivory group-hover:text-gold-light transition-colors duration-300 break-words"
               >
                 {st.line1}
               </motion.h3>
@@ -49,7 +49,7 @@ export default function Philosophy() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tighter leading-none text-metallic-gold drop-shadow-lg"
+                className="font-display font-black text-2xl xs:text-3xl sm:text-5xl md:text-7xl lg:text-8xl tracking-tight leading-tight text-metallic-gold drop-shadow-lg break-words"
               >
                 {st.line2}
               </motion.h3>
